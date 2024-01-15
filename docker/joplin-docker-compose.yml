@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=YyMaZr4QVP7ogxUW
+      - POSTGRES_USER=joplin-user
+      - POSTGRES_DB=joplindb
+  app:
+    image: joplin/server:latest
+    container_name: joplin-server
+    depends_on:
+      - db
+    ports:
+      - "127.0.0.1:8080:8080"
+    restart: always
+    environment:
+      - APP_PORT=8080
+      - APP_BASE_URL=https://notes.blazilla.de/
+      - DB_CLIENT=pg
+      - POSTGRES_PASSWORD=YyMaZr4QVP7ogxUW
+      - POSTGRES_DATABASE=joplindb
+      - POSTGRES_USER=joplin-user
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=db
+      - MAILER_ENABLED=1
+      - MAILER_HOST=smtp.mailbox.org
+      - MAILER_PORT=587
+      - MAILER_SECURITY=starttls
+      - MAILER_AUTH_USER=username@domain.tld
+      - MAILER_AUTH_PASSWORD=ThisShouldBeAPassword
+      - MAILER_NOREPLY_NAME=Joplin Server
+      - MAILER_NOREPLY_EMAIL=joplin-admin@blazilla.de
