@@ -9,7 +9,7 @@ services:
       - "127.0.0.1:5432:5432"
     restart: always
     environment:
-      - POSTGRES_PASSWORD=YyMaZr4QVP7ogxUW
+      - POSTGRES_PASSWORD=changeme
       - POSTGRES_USER=joplin-user
       - POSTGRES_DB=joplindb
   app:
@@ -24,16 +24,16 @@ services:
       - APP_PORT=8080
       - APP_BASE_URL=https://notes.blazilla.de/
       - DB_CLIENT=pg
-      - POSTGRES_PASSWORD=YyMaZr4QVP7ogxUW
+      - POSTGRES_PASSWORD=changeme
       - POSTGRES_DATABASE=joplindb
       - POSTGRES_USER=joplin-user
       - POSTGRES_PORT=5432
       - POSTGRES_HOST=db
       - MAILER_ENABLED=1
-      - MAILER_HOST=smtp.mailbox.org
+      - MAILER_HOST=server.domain.tld
       - MAILER_PORT=587
       - MAILER_SECURITY=starttls
       - MAILER_AUTH_USER=username@domain.tld
-      - MAILER_AUTH_PASSWORD=ThisShouldBeAPassword
+      - MAILER_AUTH_PASSWORD=
       - MAILER_NOREPLY_NAME=Joplin Server
-      - MAILER_NOREPLY_EMAIL=joplin-admin@blazilla.de
+      - MAILER_NOREPLY_EMAIL=username@domain.tld
